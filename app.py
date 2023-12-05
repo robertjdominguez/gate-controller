@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from datetime import datetime
 from utilities.text_parser import check_query
 from utilities.gate_handlers import handle_open_gate, handle_close_gate
 from flask_cors import CORS
@@ -10,6 +11,8 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 # Route for health check. Returns a simple message to indicate the server is running.
 @app.route('/healthcheck', methods=['GET'])
 def check_health():
+    current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f"🩺 {current_time}: Checking in that I'm alive")
     return jsonify(message="I'm alive!")
 
 
